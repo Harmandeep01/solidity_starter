@@ -23,7 +23,7 @@ contract errorHandling{
             assert(finalBalance >= 10);
         }
         else {
-            revert("Remaining balance should be greater than 10");
+            revert("Remaining balance should be greater than or equals to 10");
         }
     }
 
@@ -42,6 +42,14 @@ contract errorHandling{
             //Assert function to check internal consistency of balances
             assert(balances[_from] == previousBalanceFrom - amount);
             assert(balances[_to] == previousBalanceTo + amount);
+
+            if (balances[_from] >=  10) {
+                assert(balances[_from] >= 10);
+            }
+
+            else{
+                revert("Remaining amount should be greater than or equals to  10");
+            }
 
              emit msgLog("Successfully Transferred : ",amount, _from, _to);
         }
