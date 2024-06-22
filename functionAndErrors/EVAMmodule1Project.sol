@@ -1,8 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+// required
+// assert
+// revert
+
 contract errorHandling{
     event msgLog(string Log, uint amount, address from, address to );
+    
     mapping (address => uint) balances;
 
     function viewBalance(address _address) view  external returns (uint){
@@ -14,25 +19,19 @@ contract errorHandling{
     }
 
     function withdrawMoney(address _address, uint amount) payable  external {
-        require(balances[_address] > 10, "Balance shoould not less than 10 wei"); //Require Function
-        
-        balances[address(this)] -= amount;
-
-        uint finalBalance = balances[address(this)];
-        if (finalBalance >= 10) {
-            assert(finalBalance >= 10);
-        }
-        else {
-            revert("Remaining balance should be greater than or equals to 10");
-        }
+     if (balances[_address] <= 10) {  // "Balance should not be less than 10 wei"); //
+        revert();
+     }
+     else {
+         balances[_address] -= amount;
+        //  return balances[_address];
+     }   
     }
 
     function transfer(address _from, address _to, uint amount) external payable {
-        if (balances[_from] <= 10) {
-            revert ("Transaction can't be processed!");     //Revert function
-        }
 
-        else {
+            require(balances[_from] > 10, "Insufficient Funds");
+
             uint previousBalanceFrom = balances[_from];
             uint previousBalanceTo = balances[_to];
 
@@ -40,18 +39,9 @@ contract errorHandling{
             balances[_to] += amount;
 
             //Assert function to check internal consistency of balances
-            assert(balances[_from] == previousBalanceFrom - amount);
+            assert(balances[_from] == previousBalanceFrom - amount); 
             assert(balances[_to] == previousBalanceTo + amount);
-
-            if (balances[_from] >=  10) {
-                assert(balances[_from] >= 10);
-            }
-
-            else{
-                revert("Remaining amount should be greater than or equals to  10");
-            }
 
              emit msgLog("Successfully Transferred : ",amount, _from, _to);
         }
     }
-}
