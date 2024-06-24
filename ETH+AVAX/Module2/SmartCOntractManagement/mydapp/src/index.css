@@ -1,0 +1,38 @@
+/* WalletCard.css */
+.walletCard {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.walletCard h4 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.walletCard button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.walletCard button:hover {
+    background-color: #0056b3;
+}
+
+.accountDisplay, .balanceDisplay {
+    margin-top: 20px;
+}
+
+.accountDisplay h3, .balanceDisplay h3 {
+    margin: 10px 0;
+    color: #666;
+}
